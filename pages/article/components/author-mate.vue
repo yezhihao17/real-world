@@ -1,0 +1,67 @@
+<template>
+  <div class="article-meta">
+    <nuxt-link
+      :to="{
+        name: 'profile',
+        params: {
+          username: article.author.username
+        }
+      }"
+    >
+      <img :src="article.author.image" />
+    </nuxt-link>
+    <!-- <a href=""><img src="http://i.imgur.com/Qr71crq.jpg" /></a> -->
+    <div class="info">
+      <nuxt-link
+        class="author"
+        :to="{
+          name: 'profile',
+          params: {
+            username: article.author.username
+          }
+        }"
+      >
+        {{ article.author.username }}
+      </nuxt-link>
+      <!-- <a href="" class="author">{{ article.author.username }}</a> -->
+      <span class="date">{{ article.createdAt | date('ddd MMM DD YYYY') }}</span>
+    </div>
+    <button
+      class="btn btn-sm btn-outline-secondary"
+      :class="{
+        active: article.author.following
+      }"
+    >
+      <i class="ion-plus-round"></i>
+      &nbsp;
+      Follow {{ article.author.username }} <span class="counter">(10)</span>
+    </button>
+    &nbsp;&nbsp;
+    <button
+      class="btn btn-sm btn-outline-primary"
+      :class="{
+        active: article.favorited
+      }"
+    >
+      <i class="ion-heart"></i>
+      &nbsp;
+      Favorite Post <span class="counter">({{ article.favoritesCount }})</span>
+    </button>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'AuthorMate',
+  props: {
+    article: {
+      type: Object,
+      default: {}
+    }
+  }
+}
+</script>
+
+<style>
+
+</style>
